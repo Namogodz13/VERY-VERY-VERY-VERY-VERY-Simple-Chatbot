@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Very Very Very Simple Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .chat-container {
+            width: 500px;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+        .chat-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 300px;
+            overflow-y: auto;
+        }
+        .input-box {
+            margin-top: 10px;
+        }
+        .input-box input {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .input-box button {
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <div>Chat : Hello, how can I assist you today?</div>
+        </div>
+        <div class="input-box">
+            <input type="text" id="user-input" placeholder="Type your message here..." />
+            <button onclick="sendMessage()">Send</button>
+            
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('user-input').value;
+            const chatBox = document.getElementById('chat-box');
+            
+            if (userInput.toLowerCase() === 'exit') {
+                chatBox.innerHTML += '<div>You  : ' + userInput + '</div>';
+                chatBox.innerHTML += '<div>Chat : See you later</div>';
+                setTimeout(() => window.location.reload(), 1000);
+                return;
+            }
+            
+            chatBox.innerHTML += '<div>You  : ' + userInput + '</div>';
+
+            const responses = [
+                "error",
+                "umm.. IDK",
+                "idk, I don't understand, please ask another question"
+            ];
+            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+
+            chatBox.innerHTML += '<div>Chat : ' + randomResponse + '</div>';
+            
+            document.getElementById('user-input').value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
